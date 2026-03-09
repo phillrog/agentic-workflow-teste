@@ -4,7 +4,7 @@ import google.generativeai as genai
 
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 # Usando o flash para velocidade ou pro para maior raciocínio arquitetural
-model = genai.GenerativeModel('gemini-1.5-pro')
+model = genai.GenerativeModel('gemini-3-flash-preview')
 
 prompt = f"""
 Você é um Arquiteto .NET Senior especialista em DDD e Clean Architecture.
