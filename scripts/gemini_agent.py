@@ -5,31 +5,21 @@ import google.generativeai as genai
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 # Usando o flash para velocidade ou pro para maior raciocínio arquitetural
 model = genai.GenerativeModel('gemini-3-flash-preview')
+prompt = """
+Você é um Arquiteto .NET Senior. Crie um CRUD de Usuário em .NET 10 seguindo:
+1. Clean Architecture: Projetos Domain, Application, Infrastructure e WebApi.
+2. DDD: Entidade Usuario (Id, Nome, Email, Status) e Value Object Email.
+3. Patterns: Result Pattern, Repository e Dependency Injection.
+4. Infra: EF Core com SQL Server (Configurar InMemory para testes).
+5. Testes: xUnit para validar regras de Nome (max 120) e Email válido.
 
-prompt = f"""
-Você é um Arquiteto .NET Senior especialista em DDD e Clean Architecture.
-Tarefa: {os.environ.get("ISSUE_TITLE", "Criar CRUD Usuário")}
-Contexto: {os.environ.get("ISSUE_BODY", "")}
-
-REGRAS OBRIGATÓRIAS:
-1. Framework: .NET 10 e Entity Framework Core.
-2. Arquitetura: Clean Architecture (Domain, Application, Infrastructure, WebApi).
-3. DDD: Entidades, Value Objects (Email), Repositories e Domain Services.
-4. Banco: SQL Server com Migrations, configurado para rodar In-Memory nos testes.
-5. Padrões: Result Pattern para retornos, Repository Pattern, Dependency Injection.
-6. Entidade: Usuario (Id int, Nome varchar(120), Email varchar(200), Status bool).
-7. Testes: XUnit para testes de unidade do domínio.
-8. Documente com swagger, coloque comentários
-
-Retorne os arquivos no formato EXATO:
+Retorne os arquivos no formato:
 ---FILE: caminho/do/arquivo.cs---
 CONTEUDO
 ---END---
 """
 
 response = model.generate_content(prompt)
-
-# Regex para extrair os arquivos de forma limpa
 files = re.findall(r'---FILE: (.*?)---(.*?)---END---', response.text, re.DOTALL)
 
 for file_path, content in files:
