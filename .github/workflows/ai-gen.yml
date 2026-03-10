@@ -14,55 +14,61 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      
+
+      - name: Setup .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
-      - name: Install dependencies
+      - name: Install AI Dependencies
         run: pip install google-generativeai
 
-      - name: Run Gemini Agent
+      - name: Step 1 - Generate Initial Code
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          ISSUE_BODY: ${{ github.event.issue.body }}
           ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
         run: python scripts/gemini_agent.py
 
-      - name: Attempt 1 - Build and Test
+      - name: Step 2 - Attempt Build & Test
         id: build_1
         run: |
           dotnet restore
-          dotnet build --no-restore > build_log.txt 2>&1
+          dotnet build --no-restore > build_log.txt 2>&1 || true
+          dotnet test --no-build >> build_log.txt 2>&1 || true
+          # Força falha se houver erro no arquivo de log para disparar o fixer
+          if grep -q "error" build_log.txt || grep -q "Failed" build_log.txt; then exit 1; fi
         continue-on-error: true
 
-      - name: Agent Self-Correction (Retry 1)
+      - name: Step 3 - Agentic Self-Correction
         if: steps.build_1.outcome == 'failure'
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: |
-          # Exportamos o log para uma variável de ambiente que o Python lerá
-          export BUILD_ERRORS=$(cat build_log.txt)
-          python scripts/gemini_fixer.py
-      
-      - name: Attempt 2 - Build after Fix
+        run: python scripts/gemini_fixer.py
+
+      - name: Step 4 - Final Verification
         id: build_2
         if: steps.build_1.outcome == 'failure'
         run: |
-          dotnet build > build_log_2.txt 2>&1
+          dotnet build > build_log_final.txt 2>&1
+          dotnet test --no-build >> build_log_final.txt 2>&1
         continue-on-error: true
 
-      - name: Final PR Creation
+      - name: Step 5 - Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "feat: agentic code generation with self-correction"
-          title: "[AI] ${{ github.event.issue.title }}"
+          commit-message: "feat: agentic implementation with DDD and Clean Arch"
+          title: "[AI Agent] ${{ github.event.issue.title }}"
           body: |
-            ## Relatório do Agente
-            - **Status Inicial:** ${{ steps.build_1.outcome == 'success' && '✅ Passou direto' || '❌ Falhou' }}
-            - **Status Final:** ${{ steps.build_2.outcome == 'success' || steps.build_1.outcome == 'success' && '✅ Sucesso' || '⚠️ Erro persistente' }}
+            ## 🤖 Relatório de Automação Agêntica
+            - **Status do Build:** ${{ steps.build_2.outcome == 'success' || steps.build_1.outcome == 'success' && '✅ Verde' || '⚠️ Vermelho' }}
+            - **Auto-Correção Ativada:** ${{ steps.build_1.outcome == 'failure' && 'Sim' || 'Não' }}
             
-            Baseado na Issue #${{ github.event.issue.number }}
+            Este código foi gerado e validado automaticamente pelo Gemini.
           branch: "ai-feature-${{ github.event.issue.number }}"
