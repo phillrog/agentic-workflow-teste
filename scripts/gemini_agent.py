@@ -5,16 +5,27 @@ import google.generativeai as genai
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 # Usando o flash para velocidade ou pro para maior raciocínio arquitetural
 model = genai.GenerativeModel('gemini-3-flash-preview')
+
 prompt = """
-Você é um Arquiteto .NET Senior. Crie um CRUD de Usuário em .NET 10 seguindo:
-1. Clean Architecture: Projetos Domain, Application, Infrastructure e WebApi.
-2. DDD: Entidade Usuario (Id, Nome, Email, Status) e Value Object Email.
-3. Patterns: Result Pattern, Repository e Dependency Injection.
-4. Infra: EF Core com SQL Server (Configurar InMemory para testes).
-5. Testes: xUnit para validar regras de Nome (max 120) e Email válido.
+Você é um Arquiteto .NET Senior. Crie uma solução completa de CRUD de Usuário em .NET 10.
+IMPORTANTE: Você deve gerar os arquivos .sln e .csproj para cada projeto.
+
+Estrutura de pastas:
+- ./Solution.sln
+- ./Domain/Domain.csproj
+- ./Application/Application.csproj
+- ./Infrastructure/Infrastructure.csproj
+- ./WebApi/WebApi.csproj
+- ./Tests/Tests.csproj
+
+Regras:
+1. Use Clean Architecture e DDD.
+2. Configure as referências de projeto nos .csproj (ex: Application referencia Domain).
+3. Use o Result Pattern e xUnit.
+4. O banco deve ser SQL Server com EF Core (InMemory para testes).
 
 Retorne os arquivos no formato:
----FILE: caminho/do/arquivo.cs---
+---FILE: caminho/do/arquivo---
 CONTEUDO
 ---END---
 """
