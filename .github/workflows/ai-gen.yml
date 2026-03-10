@@ -38,3 +38,16 @@ jobs:
           title: "[AI] ${{ github.event.issue.title }}"
           body: "Auto-generated code based on Issue #${{ github.event.issue.number }}"
           branch: "ai-feature-${{ github.event.issue.number }}"
+      - name: Build and Test Generated Code
+        run: |
+          dotnet restore
+          dotnet build --no-restore
+          dotnet test --no-build
+        continue-on-error: true # Permite que o fluxo continue se falhar
+      
+      - name: Agent Self-Correction (The Agentic Part)
+        if: steps.build.outcome == 'failure'
+        run: |
+          # Chama o Gemini de novo passando o log de erro 
+          # para que ele gere um "fix" antes de abrir a PR.
+          python scripts/gemini_fixer.py
