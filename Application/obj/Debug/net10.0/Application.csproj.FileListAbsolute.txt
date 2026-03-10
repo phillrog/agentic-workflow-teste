@@ -1,0 +1,16 @@
+/home/runner/work/agentic-workflow-teste/agentic-workflow-teste/Application/bin/Debug/net10.0/Application.deps.json
+/home/runner/work/agentic-workflow-teste/agentic-workflow-teste/Application/bin/Debug/net10.0/Application.dll
+/home/runner/work/agentic-workflow-teste/agentic-workflow-teste/Application/bin/Debug/net10.0/Application.pdb
+/home/runner/work/agentic-workflow-teste/agentic-workflow-teste/Application/bin/Debug/net10.0/Domain.dll
+/home/runner/work/agentic-workflow-teste/agentic-workflow-teste/Application/bin/Debug/net10.0/Domain.pdb
+/home/runner/work/agentic-workflow-teste/agentic-workflow-teste/Application/obj/Debug/net10.0/Application.csproj.AssemblyReference.cache
+/home/runner/work/agentic-workflow-teste/agentic-workflow-teste/Application/obj/Debug/net10.0/Application.GeneratedMSBuildEditorConfig.editorconfig
+/home/runner/work/agentic-workflow-teste/agentic-workflow-teste/Application/obj/Debug/net10.0/Application.AssemblyInfoInputs.cache
+/home/runner/work/agentic-workflow-teste/agentic-workflow-teste/Application/obj/Debug/net10.0/Application.AssemblyInfo.cs
+/home/runner/work/agentic-workflow-teste/agentic-workflow-teste/Application/obj/Debug/net10.0/Application.csproj.CoreCompileInputs.cache
+/home/runner/work/agentic-workflow-teste/agentic-workflow-teste/Application/obj/Debug/net10.0/Application.sourcelink.json
+/home/runner/work/agentic-workflow-teste/agentic-workflow-teste/Application/obj/Debug/net10.0/Applicat.44B5EDA2.Up2Date
+/home/runner/work/agentic-workflow-teste/agentic-workflow-teste/Application/obj/Debug/net10.0/Application.dll
+/home/runner/work/agentic-workflow-teste/agentic-workflow-teste/Application/obj/Debug/net10.0/refint/Application.dll
+/home/runner/work/agentic-workflow-teste/agentic-workflow-teste/Application/obj/Debug/net10.0/Application.pdb
+/home/runner/work/agentic-workflow-teste/agentic-workflow-teste/Application/obj/Debug/net10.0/ref/Application.dll

@@ -1,0 +1,18 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  Domain -> /home/runner/work/agentic-workflow-teste/agentic-workflow-teste/Domain/bin/Debug/net10.0/Domain.dll
+  Application -> /home/runner/work/agentic-workflow-teste/agentic-workflow-teste/Application/bin/Debug/net10.0/Application.dll
+  Infrastructure -> /home/runner/work/agentic-workflow-teste/agentic-workflow-teste/Infrastructure/bin/Debug/net10.0/Infrastructure.dll
+/home/runner/work/agentic-workflow-teste/agentic-workflow-teste/WebApi/Program.cs(4,18): error CS1061: 'IServiceCollection' does not contain a definition for 'AddSwaggerGen' and no accessible extension method 'AddSwaggerGen' accepting a first argument of type 'IServiceCollection' could be found (are you missing a using directive or an assembly reference?) [/home/runner/work/agentic-workflow-teste/agentic-workflow-teste/WebApi/WebApi.csproj]
+/home/runner/work/agentic-workflow-teste/agentic-workflow-teste/WebApi/Program.cs(10,9): error CS1061: 'WebApplication' does not contain a definition for 'UseSwagger' and no accessible extension method 'UseSwagger' accepting a first argument of type 'WebApplication' could be found (are you missing a using directive or an assembly reference?) [/home/runner/work/agentic-workflow-teste/agentic-workflow-teste/WebApi/WebApi.csproj]
+/home/runner/work/agentic-workflow-teste/agentic-workflow-teste/WebApi/Program.cs(11,9): error CS1061: 'WebApplication' does not contain a definition for 'UseSwaggerUI' and no accessible extension method 'UseSwaggerUI' accepting a first argument of type 'WebApplication' could be found (are you missing a using directive or an assembly reference?) [/home/runner/work/agentic-workflow-teste/agentic-workflow-teste/WebApi/WebApi.csproj]
+
+Build FAILED.
+
+/home/runner/work/agentic-workflow-teste/agentic-workflow-teste/WebApi/Program.cs(4,18): error CS1061: 'IServiceCollection' does not contain a definition for 'AddSwaggerGen' and no accessible extension method 'AddSwaggerGen' accepting a first argument of type 'IServiceCollection' could be found (are you missing a using directive or an assembly reference?) [/home/runner/work/agentic-workflow-teste/agentic-workflow-teste/WebApi/WebApi.csproj]
+/home/runner/work/agentic-workflow-teste/agentic-workflow-teste/WebApi/Program.cs(10,9): error CS1061: 'WebApplication' does not contain a definition for 'UseSwagger' and no accessible extension method 'UseSwagger' accepting a first argument of type 'WebApplication' could be found (are you missing a using directive or an assembly reference?) [/home/runner/work/agentic-workflow-teste/agentic-workflow-teste/WebApi/WebApi.csproj]
+/home/runner/work/agentic-workflow-teste/agentic-workflow-teste/WebApi/Program.cs(11,9): error CS1061: 'WebApplication' does not contain a definition for 'UseSwaggerUI' and no accessible extension method 'UseSwaggerUI' accepting a first argument of type 'WebApplication' could be found (are you missing a using directive or an assembly reference?) [/home/runner/work/agentic-workflow-teste/agentic-workflow-teste/WebApi/WebApi.csproj]
+    0 Warning(s)
+    3 Error(s)
+
+Time Elapsed 00:00:02.25
