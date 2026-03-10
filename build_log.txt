@@ -1,0 +1,18 @@
+  Domain -> /home/runner/work/agentic-workflow-teste/agentic-workflow-teste/Domain/bin/Debug/net10.0/Domain.dll
+  Application -> /home/runner/work/agentic-workflow-teste/agentic-workflow-teste/Application/bin/Debug/net10.0/Application.dll
+  Infrastructure -> /home/runner/work/agentic-workflow-teste/agentic-workflow-teste/Infrastructure/bin/Debug/net10.0/Infrastructure.dll
+  WebApi -> /home/runner/work/agentic-workflow-teste/agentic-workflow-teste/WebApi/bin/Debug/net10.0/WebApi.dll
+  Tests -> /home/runner/work/agentic-workflow-teste/agentic-workflow-teste/Tests/bin/Debug/net10.0/Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:08.79
+Test run for /home/runner/work/agentic-workflow-teste/agentic-workflow-teste/Tests/bin/Debug/net10.0/Tests.dll (.NETCoreApp,Version=v10.0)
+VSTest version 18.0.1 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:     2, Skipped:     0, Total:     2, Duration: 71 ms - Tests.dll (net10.0)
