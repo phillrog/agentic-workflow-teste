@@ -5,20 +5,24 @@ import google.generativeai as genai
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 model = genai.GenerativeModel('gemini-3-flash-preview')
 
-# Captura o log de erro do build vindo do shell
-error_log = os.environ.get("BUILD_ERRORS", "Erro não capturado.")
+# Tenta ler o log de erro gerado pelo Workflow
+try:
+    with open("build_log.txt", "r") as f:
+        error_log = f.read()
+except FileNotFoundError:
+    error_log = "Log de erro não encontrado no diretório raiz."
 
 prompt = f"""
-Você é um Arquiteto .NET Senior. Sua missão é CORRIGIR o código que você mesmo gerou.
-O 'dotnet build' falhou com os seguintes erros:
+Você é um Arquiteto .NET Senior. O código anterior falhou no build ou nos testes.
+ERROS ENCONTRADOS:
 {error_log}
 
-INSTRUÇÕES:
-1. Analise o erro e corrija os arquivos .cs necessários.
-2. Mantenha os padrões DDD, Clean Architecture e .NET 10.
-3. Garanta que namespaces e referências de projetos estejam consistentes.
+TAREFA:
+1. Analise os arquivos atuais e corrija os erros apontados.
+2. Se for erro de teste, ajuste a lógica na Domain para satisfazer o xUnit.
+3. Se for erro de namespace ou referência, corrija a estrutura de arquivos/usings.
 
-Retorne os arquivos corrigidos no formato:
+Retorne APENAS os arquivos corrigidos no formato:
 ---FILE: caminho/do/arquivo.cs---
 CONTEUDO
 ---END---
@@ -26,9 +30,6 @@ CONTEUDO
 
 response = model.generate_content(prompt)
 files = re.findall(r'---FILE: (.*?)---(.*?)---END---', response.text, re.DOTALL)
-
-if not files:
-    print("O Agente não propôs correções ou o formato de resposta falhou.")
 
 for file_path, content in files:
     file_path = file_path.strip()
