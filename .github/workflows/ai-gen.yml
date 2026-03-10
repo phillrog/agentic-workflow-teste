@@ -34,7 +34,7 @@ jobs:
         id: build_1
         run: |
           dotnet restore
-          dotnet build --no-restore > build_log_1.txt 2>&1
+          dotnet build --no-restore > build_log.txt 2>&1
         continue-on-error: true
 
       - name: Agent Self-Correction (Retry 1)
@@ -43,7 +43,7 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           # Exportamos o log para uma variável de ambiente que o Python lerá
-          export BUILD_ERRORS=$(cat build_log_1.txt)
+          export BUILD_ERRORS=$(cat build_log.txt)
           python scripts/gemini_fixer.py
       
       - name: Attempt 2 - Build after Fix
